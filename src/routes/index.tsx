@@ -15,7 +15,7 @@ import {
   Cog,
   Hammer,
   Building2,
-  ChevronRight,
+  Plus,
 } from "lucide-react";
 import heroImg from "@/assets/hero.jpg";
 import project1 from "@/assets/project1.jpg";
@@ -103,24 +103,28 @@ const PROJECTS = [
     title: "Carros Mineros V-40",
     client: "Minera Quiruvilca",
     tag: "Fabricación",
+    code: "PRJ-001",
   },
   {
     img: project2,
     title: "Reparación Chancadora Symons 4 1/4\"",
     client: "Super Concreto",
     tag: "Reparación",
+    code: "PRJ-002",
   },
   {
     img: project3,
     title: "Planta de Cianuración y Bombas SRL",
     client: "Minera Mollehuaca",
     tag: "Montaje",
+    code: "PRJ-003",
   },
   {
     img: project4,
     title: "Piñón para Chancadora",
     client: "Municipalidad de Tacna",
     tag: "Maquinado",
+    code: "PRJ-004",
   },
 ];
 
@@ -134,60 +138,61 @@ function Index() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground">
       {/* NAVBAR */}
-      <header className="fixed top-0 inset-x-0 z-50 bg-primary/95 backdrop-blur border-b border-primary/40">
-        <div className="mx-auto max-w-7xl px-6 h-20 flex items-center justify-between">
+      <header className="fixed top-0 inset-x-0 z-50 bg-background/95 backdrop-blur border-b border-border">
+        <div className="mx-auto max-w-[1400px] px-6 h-16 flex items-center justify-between">
           <button
             onClick={() => scrollTo("inicio")}
-            className="flex items-center gap-3 text-primary-foreground"
+            className="flex items-center gap-3 text-foreground"
           >
-            <div className="grid place-items-center h-10 w-10 bg-accent text-accent-foreground font-display font-bold text-lg">
-              VMR
+            <div className="grid place-items-center h-8 w-8 bg-foreground text-background font-bold text-[13px] tracking-tight">
+              V
             </div>
-            <div className="hidden sm:block leading-tight text-left">
-              <div className="font-display font-bold text-base tracking-wide">GRUPO VMR</div>
-              <div className="text-[10px] uppercase tracking-[0.2em] text-primary-foreground/70">
+            <div className="leading-tight text-left">
+              <div className="font-semibold text-[13px] tracking-tight">Grupo VMR</div>
+              <div className="hidden sm:block text-[10px] uppercase tracking-[0.14em] text-muted-foreground font-medium">
                 Ingenieros EIRL
               </div>
             </div>
           </button>
 
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-1">
             {NAV.map((n) => (
               <button
                 key={n.id}
                 onClick={() => scrollTo(n.id)}
-                className="text-sm uppercase tracking-wider font-medium text-primary-foreground/80 hover:text-accent transition-colors"
+                className="text-[13px] font-medium text-foreground/70 hover:text-foreground px-3 py-2 transition-colors"
               >
                 {n.label}
               </button>
             ))}
+            <div className="w-px h-5 bg-border mx-3" />
             <button
               onClick={() => scrollTo("contacto")}
-              className="bg-accent text-accent-foreground font-semibold text-sm uppercase tracking-wider px-5 py-2.5 hover:brightness-110 transition"
+              className="bg-primary text-primary-foreground font-medium text-[13px] px-4 py-2 hover:brightness-110 transition"
             >
               Cotizar
             </button>
           </nav>
 
           <button
-            className="lg:hidden text-primary-foreground"
+            className="lg:hidden text-foreground"
             onClick={() => setMenuOpen((v) => !v)}
             aria-label="Menu"
           >
-            {menuOpen ? <X size={24} /> : <Menu size={24} />}
+            {menuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
 
         {menuOpen && (
-          <div className="lg:hidden bg-primary border-t border-primary-foreground/10">
-            <div className="px-6 py-4 flex flex-col gap-1">
+          <div className="lg:hidden bg-background border-t border-border">
+            <div className="px-6 py-2 flex flex-col">
               {NAV.map((n) => (
                 <button
                   key={n.id}
                   onClick={() => scrollTo(n.id)}
-                  className="text-left py-3 text-primary-foreground/90 uppercase text-sm tracking-wider border-b border-primary-foreground/10"
+                  className="text-left py-3 text-foreground/80 text-sm border-b border-border last:border-0"
                 >
                   {n.label}
                 </button>
@@ -198,108 +203,129 @@ function Index() {
       </header>
 
       {/* HERO */}
-      <section id="inicio" className="relative min-h-screen flex items-center pt-20 overflow-hidden">
-        <div className="absolute inset-0">
-          <img
-            src={heroImg}
-            alt="Taller de metalmecánica Grupo VMR"
-            width={1920}
-            height={1080}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/80 to-primary/40" />
-        </div>
-
-        <div className="relative mx-auto max-w-7xl px-6 py-24 grid lg:grid-cols-12 gap-8">
-          <div className="lg:col-span-8 text-primary-foreground">
-            <div className="inline-flex items-center gap-2 border-l-2 border-accent pl-3 mb-8">
-              <span className="text-xs uppercase tracking-[0.3em] text-accent font-semibold">
-                30 años · Perú
-              </span>
+      <section id="inicio" className="relative pt-16 border-b border-border">
+        <div className="mx-auto max-w-[1400px] px-6 grid lg:grid-cols-12 min-h-[calc(100vh-4rem)]">
+          <div className="lg:col-span-7 flex flex-col justify-center py-20 lg:py-28 lg:pr-12 lg:border-r lg:border-border">
+            <div className="flex items-center gap-3 mb-8 text-[11px] font-mono uppercase tracking-[0.18em] text-muted-foreground">
+              <span className="h-px w-8 bg-primary" />
+              <span>Est. 1994 · Lima, Perú</span>
             </div>
-            <h1 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.05] tracking-tight">
+            <h1 className="font-semibold text-[2.25rem] sm:text-5xl lg:text-[3.75rem] leading-[1.05] tracking-[-0.03em] text-foreground">
               Ingeniería y Metalmecánica de{" "}
-              <span className="text-accent">Precisión</span> para el Sector Minero e Industrial.
+              <span className="text-primary">Precisión</span>
+              <br />
+              para el Sector Minero e Industrial.
             </h1>
-            <p className="mt-8 text-base sm:text-lg text-primary-foreground/80 max-w-2xl leading-relaxed">
+            <p className="mt-8 text-base lg:text-lg text-muted-foreground max-w-xl leading-relaxed">
               Fabricación, maquinado, mantenimiento y venta de equipos repotenciados.
               30 años de experiencia respaldan nuestra calidad.
             </p>
-            <div className="mt-10 flex flex-wrap gap-4">
+            <div className="mt-10 flex flex-wrap gap-3">
               <button
                 onClick={() => scrollTo("servicios")}
-                className="group inline-flex items-center gap-3 bg-accent text-accent-foreground font-semibold uppercase tracking-wider text-sm px-7 py-4 hover:brightness-110 transition"
+                className="group inline-flex items-center gap-2 bg-primary text-primary-foreground font-medium text-sm px-5 py-3 hover:brightness-110 transition"
               >
                 Ver Servicios
-                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
               </button>
               <button
                 onClick={() => scrollTo("contacto")}
-                className="inline-flex items-center gap-3 border-2 border-primary-foreground/40 text-primary-foreground font-semibold uppercase tracking-wider text-sm px-7 py-4 hover:bg-primary-foreground hover:text-primary transition"
+                className="inline-flex items-center gap-2 border border-border text-foreground font-medium text-sm px-5 py-3 hover:border-foreground transition"
               >
                 Contactar 24/7
               </button>
             </div>
 
-            <div className="mt-16 grid grid-cols-3 gap-6 max-w-lg">
+            <div className="mt-16 grid grid-cols-3 gap-8 max-w-lg">
               {[
                 { n: "30+", l: "Años" },
                 { n: "24/7", l: "Atención" },
                 { n: "100%", l: "Garantía" },
               ].map((s) => (
-                <div key={s.l} className="border-t border-primary-foreground/20 pt-4">
-                  <div className="font-display font-bold text-3xl text-accent">{s.n}</div>
-                  <div className="text-xs uppercase tracking-widest text-primary-foreground/60 mt-1">
+                <div key={s.l}>
+                  <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground mb-2">
                     {s.l}
+                  </div>
+                  <div className="font-semibold text-3xl text-foreground tracking-tight">
+                    {s.n}
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+
+          <div className="lg:col-span-5 relative border-t lg:border-t-0 border-border">
+            <div className="lg:absolute lg:inset-0 h-64 lg:h-auto">
+              <img
+                src={heroImg}
+                alt="Taller de metalmecánica Grupo VMR"
+                width={1200}
+                height={1600}
+                className="w-full h-full object-cover grayscale contrast-110"
+              />
+              <div className="absolute inset-0 bg-primary/10 mix-blend-multiply" />
+              <div className="absolute top-4 left-4 flex items-center gap-2 bg-background/90 backdrop-blur px-3 py-1.5 text-[10px] font-mono uppercase tracking-[0.18em] text-foreground">
+                <span className="h-1.5 w-1.5 bg-primary rounded-full" />
+                Taller · Lima
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* NOSOTROS */}
-      <section id="nosotros" className="py-24 lg:py-32 bg-background">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="max-w-2xl mb-16">
-            <div className="text-xs uppercase tracking-[0.3em] text-accent font-semibold mb-4">
-              ¿Por qué elegirnos?
+      <section id="nosotros" className="border-b border-border">
+        <div className="mx-auto max-w-[1400px] px-6 py-24 lg:py-32">
+          <div className="grid lg:grid-cols-12 gap-8 mb-16">
+            <div className="lg:col-span-3">
+              <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-primary mb-3">
+                01 / Nosotros
+              </div>
             </div>
-            <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-primary leading-tight">
-              Respaldo técnico, capacidad de fabricación y disponibilidad total.
-            </h2>
+            <div className="lg:col-span-9">
+              <h2 className="font-semibold text-3xl sm:text-4xl lg:text-5xl text-foreground leading-[1.1] tracking-[-0.02em] max-w-3xl">
+                Respaldo técnico, capacidad de fabricación y disponibilidad total.
+              </h2>
+            </div>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-px bg-border">
+          <div className="grid md:grid-cols-3 border-t border-border">
             {[
               {
                 icon: Award,
                 title: "Experiencia",
                 text: "Más de 30 años sirviendo al sector minero e industrial peruano con soluciones probadas en campo.",
+                n: "01",
               },
               {
                 icon: Clock,
                 title: "Disponibilidad 24/7",
                 text: "Atención permanente, incluyendo domingos y feriados. Respondemos cuando la operación no puede esperar.",
+                n: "02",
               },
               {
                 icon: Factory,
                 title: "Capacidad Propia",
                 text: "Maestranza propia e importación directa a través de nuestra alianza con CIA HEFERCO INTERNATIONAL (EE.UU.).",
+                n: "03",
               },
             ].map((c) => (
               <div
                 key={c.title}
-                className="bg-background p-10 group hover:bg-secondary transition-colors"
+                className="p-8 lg:p-10 border-b md:border-b-0 md:border-r border-border last:border-r-0 group"
               >
-                <div className="h-14 w-14 grid place-items-center bg-primary text-primary-foreground mb-6 group-hover:bg-accent group-hover:text-accent-foreground transition-colors">
-                  <c.icon size={26} strokeWidth={1.5} />
+                <div className="flex items-start justify-between mb-10">
+                  <div className="h-10 w-10 grid place-items-center border border-border text-primary group-hover:border-primary transition-colors">
+                    <c.icon size={18} strokeWidth={1.25} />
+                  </div>
+                  <span className="text-[10px] font-mono text-muted-foreground tracking-widest">
+                    {c.n}
+                  </span>
                 </div>
-                <h3 className="font-display font-semibold text-xl text-primary mb-3">
+                <h3 className="font-semibold text-lg text-foreground mb-3 tracking-tight">
                   {c.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed">{c.text}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">{c.text}</p>
               </div>
             ))}
           </div>
@@ -307,58 +333,64 @@ function Index() {
       </section>
 
       {/* SERVICIOS */}
-      <section id="servicios" className="py-24 lg:py-32 bg-secondary">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="max-w-2xl mb-14">
-            <div className="text-xs uppercase tracking-[0.3em] text-accent font-semibold mb-4">
-              Nuestros Servicios
+      <section id="servicios" className="bg-surface border-b border-border">
+        <div className="mx-auto max-w-[1400px] px-6 py-24 lg:py-32">
+          <div className="grid lg:grid-cols-12 gap-8 mb-14">
+            <div className="lg:col-span-3">
+              <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-primary mb-3">
+                02 / Servicios
+              </div>
             </div>
-            <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-primary leading-tight">
-              Cuatro líneas de servicio, una sola exigencia: precisión.
-            </h2>
+            <div className="lg:col-span-9">
+              <h2 className="font-semibold text-3xl sm:text-4xl lg:text-5xl text-foreground leading-[1.1] tracking-[-0.02em] max-w-3xl">
+                Cuatro líneas de servicio,
+                <br />
+                una sola exigencia: precisión.
+              </h2>
+            </div>
           </div>
 
-          {/* Tabs */}
-          <div className="grid lg:grid-cols-12 gap-8">
-            <div className="lg:col-span-4 flex lg:flex-col gap-px bg-border overflow-x-auto lg:overflow-visible">
+          <div className="grid lg:grid-cols-12 border border-border bg-background">
+            <div className="lg:col-span-4 flex lg:flex-col overflow-x-auto lg:overflow-visible lg:border-r border-border">
               {SERVICES.map((s, i) => (
                 <button
                   key={s.title}
                   onClick={() => setActiveTab(i)}
-                  className={`flex items-center gap-4 px-5 py-5 text-left bg-background transition-colors shrink-0 lg:w-full ${
+                  className={`flex items-center gap-3 px-5 py-4 lg:py-5 text-left transition-colors shrink-0 lg:w-full border-b border-border last:border-b-0 ${
                     activeTab === i
-                      ? "border-l-4 border-accent"
-                      : "border-l-4 border-transparent hover:bg-secondary"
+                      ? "bg-foreground text-background"
+                      : "bg-background text-foreground hover:bg-surface"
                   }`}
                 >
-                  <s.icon
-                    size={22}
-                    className={activeTab === i ? "text-accent" : "text-primary"}
-                    strokeWidth={1.5}
-                  />
                   <span
-                    className={`font-display font-semibold text-sm sm:text-base ${
-                      activeTab === i ? "text-primary" : "text-muted-foreground"
+                    className={`text-[10px] font-mono tracking-widest ${
+                      activeTab === i ? "text-background/60" : "text-muted-foreground"
                     }`}
                   >
-                    {s.title}
+                    0{i + 1}
                   </span>
+                  <s.icon size={16} strokeWidth={1.5} />
+                  <span className="font-medium text-sm">{s.title}</span>
                 </button>
               ))}
             </div>
 
-            <div className="lg:col-span-8 bg-background p-8 lg:p-12">
-              <div className="text-xs uppercase tracking-[0.25em] text-accent font-semibold mb-4">
-                0{activeTab + 1} / 04
+            <div className="lg:col-span-8 p-8 lg:p-12">
+              <div className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.2em] text-primary mb-6">
+                <span>0{activeTab + 1} / 04</span>
+                <span className="h-px w-8 bg-primary" />
               </div>
-              <h3 className="font-display font-bold text-2xl lg:text-3xl text-primary mb-8">
+              <h3 className="font-semibold text-2xl lg:text-3xl text-foreground mb-10 tracking-tight">
                 {SERVICES[activeTab].title}
               </h3>
-              <ul className="space-y-4">
+              <ul className="grid sm:grid-cols-2 gap-x-8">
                 {SERVICES[activeTab].items.map((it) => (
-                  <li key={it} className="flex items-start gap-3 border-b border-border pb-4">
-                    <ChevronRight size={18} className="text-accent shrink-0 mt-1" />
-                    <span className="text-foreground/80">{it}</span>
+                  <li
+                    key={it}
+                    className="flex items-start gap-3 border-t border-border py-4 text-sm text-foreground/80"
+                  >
+                    <Plus size={14} className="text-primary shrink-0 mt-1" strokeWidth={2} />
+                    <span>{it}</span>
                   </li>
                 ))}
               </ul>
@@ -368,40 +400,46 @@ function Index() {
       </section>
 
       {/* PROYECTOS */}
-      <section id="proyectos" className="py-24 lg:py-32 bg-background">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="flex flex-wrap items-end justify-between gap-6 mb-14">
-            <div className="max-w-2xl">
-              <div className="text-xs uppercase tracking-[0.3em] text-accent font-semibold mb-4">
-                Casos de Éxito
+      <section id="proyectos" className="border-b border-border">
+        <div className="mx-auto max-w-[1400px] px-6 py-24 lg:py-32">
+          <div className="grid lg:grid-cols-12 gap-8 mb-14">
+            <div className="lg:col-span-3">
+              <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-primary mb-3">
+                03 / Proyectos
               </div>
-              <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-primary leading-tight">
-                Proyectos destacados.
+            </div>
+            <div className="lg:col-span-9">
+              <h2 className="font-semibold text-3xl sm:text-4xl lg:text-5xl text-foreground leading-[1.1] tracking-[-0.02em]">
+                Casos de éxito.
               </h2>
             </div>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 border-t border-l border-border">
             {PROJECTS.map((p) => (
-              <article key={p.title} className="group">
-                <div className="relative overflow-hidden aspect-[4/5] bg-secondary">
+              <article
+                key={p.title}
+                className="group border-r border-b border-border bg-background"
+              >
+                <div className="relative overflow-hidden aspect-[4/5] bg-surface">
                   <img
                     src={p.img}
                     alt={p.title}
-                    width={1024}
-                    height={768}
+                    width={800}
+                    height={1000}
                     loading="lazy"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
                   />
-                  <div className="absolute top-4 left-4 bg-accent text-accent-foreground text-[10px] uppercase tracking-widest font-bold px-2.5 py-1">
+                  <div className="absolute top-3 left-3 bg-background text-foreground text-[10px] font-mono uppercase tracking-[0.14em] px-2 py-1">
                     {p.tag}
                   </div>
                 </div>
-                <div className="pt-5">
-                  <div className="text-xs uppercase tracking-wider text-muted-foreground mb-1">
-                    {p.client}
+                <div className="p-5 border-t border-border">
+                  <div className="flex items-center justify-between mb-2 text-[10px] font-mono uppercase tracking-[0.16em] text-muted-foreground">
+                    <span>{p.code}</span>
+                    <span>{p.client}</span>
                   </div>
-                  <h3 className="font-display font-semibold text-lg text-primary leading-snug">
+                  <h3 className="font-semibold text-[15px] text-foreground leading-snug tracking-tight">
                     {p.title}
                   </h3>
                 </div>
@@ -412,24 +450,24 @@ function Index() {
       </section>
 
       {/* CONTACTO */}
-      <section id="contacto" className="bg-primary text-primary-foreground">
-        <div className="mx-auto max-w-7xl px-6 py-24 lg:py-32 grid lg:grid-cols-12 gap-12">
+      <section id="contacto" className="bg-foreground text-background">
+        <div className="mx-auto max-w-[1400px] px-6 py-24 lg:py-32 grid lg:grid-cols-12 gap-12">
           <div className="lg:col-span-6">
-            <div className="text-xs uppercase tracking-[0.3em] text-accent font-semibold mb-4">
-              Contacto
+            <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-primary mb-3">
+              04 / Contacto
             </div>
-            <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl leading-tight">
+            <h2 className="font-semibold text-3xl sm:text-4xl lg:text-5xl leading-[1.1] tracking-[-0.02em]">
               Dispuestos a realizar los trabajos que ustedes requieran,
-              <span className="text-accent"> en el momento que lo necesiten.</span>
+              <span className="text-primary"> en el momento que lo necesiten.</span>
             </h2>
-            <p className="mt-6 text-primary-foreground/70 max-w-lg leading-relaxed">
+            <p className="mt-6 text-background/60 max-w-lg leading-relaxed text-sm">
               Escríbanos o llámenos. Nuestro equipo técnico responde las 24 horas,
               incluyendo domingos y feriados.
             </p>
           </div>
 
           <div className="lg:col-span-6 lg:col-start-7">
-            <div className="space-y-px bg-primary-foreground/10">
+            <div className="border-t border-background/15">
               {[
                 {
                   icon: MapPin,
@@ -454,19 +492,21 @@ function Index() {
                   <Tag
                     key={c.label}
                     {...(c.href ? { href: c.href } : {})}
-                    className="flex items-start gap-5 bg-primary p-6 hover:bg-primary/60 transition-colors"
+                    className="flex items-center gap-5 py-6 border-b border-background/15 group hover:text-primary transition-colors"
                   >
-                    <div className="h-12 w-12 grid place-items-center bg-accent text-accent-foreground shrink-0">
-                      <c.icon size={20} strokeWidth={1.75} />
+                    <div className="h-10 w-10 grid place-items-center border border-background/25 shrink-0 group-hover:border-primary transition-colors">
+                      <c.icon size={16} strokeWidth={1.5} />
                     </div>
-                    <div className="min-w-0">
-                      <div className="text-[10px] uppercase tracking-[0.25em] text-primary-foreground/60 mb-1">
+                    <div className="min-w-0 flex-1">
+                      <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-background/50 mb-1">
                         {c.label}
                       </div>
-                      <div className="font-display font-semibold text-lg break-words">
-                        {c.value}
-                      </div>
+                      <div className="font-medium text-base break-words">{c.value}</div>
                     </div>
+                    <ArrowRight
+                      size={16}
+                      className="text-background/40 group-hover:text-primary group-hover:translate-x-1 transition-all"
+                    />
                   </Tag>
                 );
               })}
@@ -474,8 +514,8 @@ function Index() {
           </div>
         </div>
 
-        <div className="border-t border-primary-foreground/10">
-          <div className="mx-auto max-w-7xl px-6 py-8 flex flex-wrap items-center justify-between gap-4 text-xs uppercase tracking-widest text-primary-foreground/50">
+        <div className="border-t border-background/15">
+          <div className="mx-auto max-w-[1400px] px-6 py-6 flex flex-wrap items-center justify-between gap-4 text-[10px] font-mono uppercase tracking-[0.2em] text-background/50">
             <div>© {new Date().getFullYear()} Grupo VMR Ingenieros EIRL</div>
             <div>Lima · Perú</div>
           </div>
@@ -488,10 +528,10 @@ function Index() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="WhatsApp"
-        className="fixed bottom-6 right-6 z-50 h-14 w-14 rounded-full grid place-items-center shadow-xl text-white transition-transform hover:scale-110"
+        className="fixed bottom-6 right-6 z-50 h-12 w-12 grid place-items-center shadow-lg text-white transition-transform hover:scale-110"
         style={{ backgroundColor: "#25D366" }}
       >
-        <MessageCircle size={26} strokeWidth={2} fill="currentColor" fillOpacity={0.15} />
+        <MessageCircle size={22} strokeWidth={2} fill="currentColor" fillOpacity={0.15} />
       </a>
     </div>
   );
