@@ -211,7 +211,7 @@ function Index() {
               <span>Est. 1994 · Lima, Perú</span>
             </div>
             <h1 className="font-semibold text-[2.25rem] sm:text-5xl lg:text-[3.75rem] leading-[1.05] tracking-[-0.03em] text-foreground">
-              Ingeniería y Metalmecánica de{" "}
+              Hola, Ingeniería y Metalmecánica de{" "}
               <span className="text-primary">Precisión</span>
               <br />
               para el Sector Minero e Industrial.
